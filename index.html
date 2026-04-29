@@ -331,6 +331,19 @@ footer a{color:rgba(255,255,255,.45);text-decoration:none}
 .fi{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
 .fi.on{opacity:1;transform:translateY(0)}
 </style>
+<script type="text/javascript">
+function importHotmart(){ 
+    var imported = document.createElement('script'); 
+    imported.src = 'https://static.hotmart.com/checkout/widget.min.js'; 
+    document.head.appendChild(imported); 
+    var link = document.createElement('link'); 
+    link.rel = 'stylesheet'; 
+    link.type = 'text/css'; 
+    link.href = 'https://static.hotmart.com/css/hotmart-fb.min.css'; 
+    document.head.appendChild(link); 
+} 
+importHotmart(); 
+</script>
 </head>
 <body>
 
@@ -350,7 +363,7 @@ footer a{color:rgba(255,255,255,.45);text-decoration:none}
         <div class="stat"><span class="stat-num">6+</span><span class="stat-label">Países LATAM</span></div>
       </div>
       <div class="hero-cta-wrap">
-        <a href="https://go.hotmart.com/G105564347C" class="btn-primary" target="_blank">QUIERO MI COPIA AHORA ✓</a>
+        <a onclick="return false;" href="https://pay.hotmart.com/G105564347C?checkoutMode=2" class="btn-primary hotmart-fb hotmart__button-checkout">QUIERO MI COPIA AHORA →</a>
         <p class="btn-price">Solo <strong>$17 USD</strong> · Acceso inmediato · PDF descargable</p>
         <div class="hero-lock">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -630,7 +643,7 @@ footer a{color:rgba(255,255,255,.45);text-decoration:none}
       <span class="cta-inc">PDF interactivo</span>
       <span class="cta-inc">Acceso inmediato</span>
     </div>
-    <a href="https://go.hotmart.com/G105564347C" class="btn-primary" style="font-size:19px;padding:21px 56px" target="_blank">
+    <a onclick="return false;" href="https://pay.hotmart.com/G105564347C?checkoutMode=2" class="btn-primary hotmart-fb hotmart__button-checkout" style="font-size:19px;padding:21px 56px">
       QUIERO MI BOTIQUÍN AHORA →
     </a>
     <div class="guarantees">
@@ -670,7 +683,7 @@ footer a{color:rgba(255,255,255,.45);text-decoration:none}
 <!-- ══ STICKY BAR ══ -->
 <div class="sticky" id="stickyBar">
   <p class="sticky-txt"><strong>El Botiquín Natural de mi Abuela</strong> — 100 plantas · 3 Bonus · $17 USD</p>
-  <a href="https://go.hotmart.com/G105564347C" class="btn-sticky" target="_blank">COMPRAR AHORA →</a>
+  <a onclick="return false;" href="https://pay.hotmart.com/G105564347C?checkoutMode=2" class="btn-sticky hotmart-fb hotmart__button-checkout">COMPRAR AHORA →</a>
 </div>
 
 <script>
@@ -728,7 +741,15 @@ function updateTimer() {
 updateTimer();
 setInterval(updateTimer, 1000);
 
-
+// UTM passthrough
+const params = new URLSearchParams(window.location.search);
+document.querySelectorAll('a[href*="hotmart"]').forEach(link => {
+  try {
+    const url = new URL(link.href);
+    params.forEach((v, k) => url.searchParams.set(k, v));
+    link.href = url.toString();
+  } catch(e) {}
+});
 </script>
 </body>
 </html>
