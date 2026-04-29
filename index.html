@@ -729,14 +729,7 @@ updateTimer();
 setInterval(updateTimer, 1000);
 
 
-const params = new URLSearchParams(window.location.search);
-document.querySelectorAll('a[href*="hotmart"]').forEach(link => {
-  try {
-    const url = new URL(link.href);
-    params.forEach((v, k) => url.searchParams.set(k, v));
-    link.href = url.toString();
-  } catch(e) {}
-});
+
 </script>
 </body>
 </html>
